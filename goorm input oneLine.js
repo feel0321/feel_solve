@@ -1,3 +1,4 @@
+// 한 줄 입력받기
 const readline = require("readline");
 
 const rl = readline.createInterface({
