@@ -15,10 +15,23 @@ gameMap = gameMap.map((element) =>
   element.split(" ").map((element2) => Number(element2))
 );
 
-const visited = [];
+let visited = [];
 const dy = [1, 0];
 const dx = [0, 1];
+
 DFS(gameMap, 0, 0);
+console.log("DFS 후");
+console.log(visited);
+if (visited.includes(`${n - 1} ${n - 1}`)) {
+  console.log("HaruHaru");
+} else {
+  console.log("Hing");
+}
+
+visited = [];
+BFS(gameMap, 0, 0);
+console.log("BFS 후");
+console.log(visited);
 if (visited.includes(`${n - 1} ${n - 1}`)) {
   console.log("HaruHaru");
 } else {
@@ -34,6 +47,26 @@ function DFS(gameMap, x, y) {
     const nextX = x + dx[i] * val;
     if (nextY < n && nextX < n && !visited.includes(`${nextY} ${nextX}`)) {
       DFS(gameMap, nextX, nextY);
+    }
+  }
+}
+
+function BFS(gameMap, x, y) {
+  const queue = [y, x];
+  visited.push(`${y} ${x}`);
+
+  while (queue.length) {
+    const newY = queue.shift();
+    const newX = queue.shift();
+    const val = gameMap[newY][newX];
+    for (let i = 0; i < 2; i++) {
+      const nextY = newY + dy[i] * val;
+      const nextX = newX + dx[i] * val;
+      if (nextY < n && nextX < n && !visited.includes(`${nextY} ${nextX}`)) {
+        queue.push(nextY);
+        queue.push(nextX);
+        visited.push(`${nextY} ${nextX}`);
+      }
     }
   }
 }
