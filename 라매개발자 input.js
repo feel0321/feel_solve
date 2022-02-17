@@ -2,7 +2,7 @@ const fs = require("fs");
 // 백준 플랫폼이 리눅스기 때문. 로컬에서 테스트시 input.txt에 입력받을 내용을 입력 후 파일을 읽어오는식으로 테스트
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 
-let input = fs.readFileSync(filePath).toString().split("\n");
+let input = fs.readFileSync(filePath).toString().trim().split("\n");
 console.log(input);
 input = input[0];
 console.log(input);
