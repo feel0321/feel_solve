@@ -44,18 +44,18 @@ class SinglyLinkedList {
 
     let prevNode = this.head;
     // 삭제할 value를 가리키는 전 단계 Node를 찾는다
-    while (prevNode.next.value !== value) {
+    while (prevNode.next && prevNode.next.value !== value) {
       prevNode = prevNode.next;
-      // 삭제할 값을 찾지 못하고 끝까지 탐색했으면 삭제할 값이 없는 것
-      if (prevNode.next === null) {
-        console.log(`${value}를 찾을 수 없습니다. 삭제 불가`);
-        return;
-      }
     }
-
-    // 전 단계 Node가 삭제할 value의 next를 가리키도록해서 value를 가리키지다 않도록 해서 삭제
-    prevNode.next = prevNode.next.next;
-    this.len -= 1;
+    // 다음 Node가 있으면
+    if (prevNode.next !== null) {
+      // 다다음Node를 다음으로 가리키도록 해서 다음 Node를 삭제
+      prevNode.next = prevNode.next.next;
+      this.len -= 1;
+      return;
+    }
+    // 다음 Node가 없으면 === 끝까지 탐색했는데 못찾음
+    console.log(`${value}를 찾을 수 없습니다.`);
   }
 
   // head부터 value를 탐색
@@ -92,6 +92,7 @@ const linkedList = new SinglyLinkedList();
 linkedList.append(1);
 linkedList.append(2);
 linkedList.append(3);
+linkedList.remove(10);
 linkedList.remove(1);
 console.log(linkedList.size());
 console.log(linkedList.find(2));
