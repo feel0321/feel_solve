@@ -9,6 +9,7 @@ class SinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.len = 0;
   }
 
   // 노드를 끝에 추가
@@ -21,6 +22,7 @@ class SinglyLinkedList {
       this.tail.next = newNode;
       this.tail = newNode;
     }
+    this.len += 1;
   }
 
   // 노드를 중간에 추가
@@ -28,6 +30,7 @@ class SinglyLinkedList {
     const newNode = new Node(newValue);
     newNode.next = node.next;
     node.next = newNode;
+    this.len += 1;
   }
 
   // 삭제
@@ -46,6 +49,7 @@ class SinglyLinkedList {
     // 전 단계 Node가 삭제할 value의 next를 가리키도록해서 value를 가리키지다 않도록 해서 삭제
     if (prevNode.next !== null) {
       prevNode.next = prevNode.next.next;
+      this.len -= 1;
     }
   }
 
@@ -75,13 +79,7 @@ class SinglyLinkedList {
   }
 
   size() {
-    let currNode = this.head;
-    let length = 0;
-    while (currNode !== null) {
-      currNode = currNode.next;
-      length += 1;
-    }
-    return length;
+    return this.len;
   }
 }
 
