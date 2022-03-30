@@ -35,6 +35,13 @@ class SinglyLinkedList {
 
   // 삭제
   remove(value) {
+    // head.value가 삭제할 값일 때
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.len -= 1;
+      return;
+    }
+
     let prevNode = this.head;
     // 삭제할 value를 가리키는 전 단계 Node를 찾는다
     while (prevNode.next.value !== value) {
@@ -47,10 +54,8 @@ class SinglyLinkedList {
     }
 
     // 전 단계 Node가 삭제할 value의 next를 가리키도록해서 value를 가리키지다 않도록 해서 삭제
-    if (prevNode.next !== null) {
-      prevNode.next = prevNode.next.next;
-      this.len -= 1;
-    }
+    prevNode.next = prevNode.next.next;
+    this.len -= 1;
   }
 
   // head부터 value를 탐색
@@ -86,6 +91,10 @@ class SinglyLinkedList {
 const linkedList = new SinglyLinkedList();
 linkedList.append(1);
 linkedList.append(2);
+linkedList.append(3);
+linkedList.remove(1);
 console.log(linkedList.size());
-console.log(linkedList.find(3));
-linkedList.remove(10);
+console.log(linkedList.find(2));
+linkedList.remove(1000);
+linkedList.remove(3);
+linkedList.display();
