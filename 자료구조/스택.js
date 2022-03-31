@@ -20,6 +20,7 @@ class Stack {
   }
 
   pop() {
+    // if (this.len === 0) {
     if (this.top === null) {
       console.log("스택이 비어있습니다. pop 불가");
       return;
@@ -36,7 +37,7 @@ class Stack {
 }
 
 const stack = new Stack();
-console.log(stack.pop()); // 3
+console.log(stack.pop()); // undefined
 stack.push(1);
 console.log(stack);
 stack.push(2);
