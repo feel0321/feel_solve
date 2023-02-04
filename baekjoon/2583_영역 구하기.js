@@ -12,26 +12,9 @@ const answer = solution(yLength, xLength, input);
 console.log(answer);
 
 function solution(yLength, xLength, input) {
-  const ground = Array.from({ length: yLength }, () =>
-    Array(xLength).fill(false)
-  );
-  const visited = Array.from({ length: yLength }, () =>
-    Array(xLength).fill(false)
-  );
+  const [ground, visited] = setGround(input);
   const answer = [];
   let count = 0;
-
-  input.forEach((line) => {
-    const [leftDownX, leftDownY, rightUpX, rightUpY] = line
-      .split(" ")
-      .map(Number);
-    for (let y = leftDownY; y < rightUpY; y++) {
-      for (let x = leftDownX; x < rightUpX; x++) {
-        ground[y][x] = true;
-      }
-    }
-    // console.table(ground);
-  });
 
   for (let y = 0; y < yLength; y++) {
     for (let x = 0; x < xLength; x++) {
@@ -66,4 +49,27 @@ function solution(yLength, xLength, input) {
   }
 
   return `${answer.length}\n${answer.sort((a, b) => a - b).join(" ")}`;
+}
+
+function setGround(input) {
+  const ground = Array.from({ length: yLength }, () =>
+    Array(xLength).fill(false)
+  );
+  const visited = Array.from({ length: yLength }, () =>
+    Array(xLength).fill(false)
+  );
+
+  input.forEach((line) => {
+    const [leftDownX, leftDownY, rightUpX, rightUpY] = line
+      .split(" ")
+      .map(Number);
+    for (let y = leftDownY; y < rightUpY; y++) {
+      for (let x = leftDownX; x < rightUpX; x++) {
+        ground[y][x] = true;
+      }
+    }
+    // console.table(ground);
+  });
+
+  return [ground, visited];
 }
