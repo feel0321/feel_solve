@@ -53,7 +53,7 @@ function solution(input, n) {
   let y = null;
   let x = null;
   let distance = 0;
-  let visited = Array.from({ length: n }, () => Array(n).fill(false));
+  let visited = initVisited(n);
   const dy = [-1, 0, 1, 0];
   const dx = [0, -1, 0, 1];
 
@@ -69,7 +69,7 @@ function solution(input, n) {
 
   let fishes = bfs(y, x);
 
-  return test();
+  return getDistance();
 
   function bfs(startY, startX) {
     const queue = new Queue();
@@ -116,7 +116,7 @@ function solution(input, n) {
     return tempFishes;
   }
 
-  function test() {
+  function getDistance() {
     while (fishes.length > 0) {
       const [currentY, currentX, currentDistance] = fishes.shift();
       input[y][x] = 0;
@@ -130,10 +130,14 @@ function solution(input, n) {
         exp = 0;
       }
 
-      visited = Array.from({ length: n }, () => Array(n).fill(false));
+      visited = initVisited(n);
       fishes = bfs(y, x);
     }
 
     return distance;
   }
+}
+
+function initVisited(n) {
+  return Array.from({ length: n }, () => Array(n).fill(false));
 }
