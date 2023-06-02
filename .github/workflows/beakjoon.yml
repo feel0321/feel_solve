@@ -1,0 +1,38 @@
+name: Auto post to notion
+
+on:
+  push:
+    paths:
+      - "beakjoon/**" ##change me
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install Git
+        run: sudo apt-get install -y git
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r .github/requirements.txt
+      - name: Get changed file names
+        run: |
+          git_path=$(which git)
+          $git_path  diff --name-only ${{ github.event.before }} ${{ github.sha }} > .github/changed_files.txt
+      - name: Auto post to notion
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          NOTION_SELF_ID: ${{ secrets.NOTION_SELF_ID }}
+        run: python .github/auto_notion_post.py
