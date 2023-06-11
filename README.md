@@ -16,7 +16,7 @@ This project is a template project to help solve various algorithm problems.
    - **DATABASE_ID:** The database ID of the Notion to record the problem solving.
    - **NOTION_SELF_ID:** The personal ID of the Notion to record the problem solving.
 4. Go to the **Actions** tab of your fork and click the "enable" button
-5. Check the "Read and write permissions" in Settings > Actions > General > Workflow permissions
+5. Check the "Read repository content and packages permissions" in Settings > Actions > General > Workflow permissions
 
 ### How to Use
 

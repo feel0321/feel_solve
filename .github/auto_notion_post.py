@@ -1,4 +1,3 @@
-# from glob import glob
 from os import getenv, path
 from re import findall
 from requests import get
@@ -46,15 +45,9 @@ level = levels[N % 5]
 
 title = f"{problem_num}_{json_data['titleKo']}"
 
-
-commit_timestamp = getenv("GITHUB_EVENT_HEAD_COMMIT_TIMESTAMP")
-commit_datetime = datetime.fromisoformat(commit_timestamp)
-
 kst = timezone("Asia/Seoul")
-commit_datetime_kst = commit_datetime.astimezone(kst)
 
-
-now_date = commit_datetime_kst.strftime("%Y-%m-%d")
+now_date = datetime.now(kst).strftime("%Y-%m-%d")
 
 notion = Client(auth=getenv("NOTION_TOKEN"))
 database_id = getenv("DATABASE_ID")

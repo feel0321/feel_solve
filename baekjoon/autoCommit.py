@@ -5,7 +5,7 @@ from re import findall
 
 if __name__ == "__main__":
     cur_dir = os.path.abspath(os.curdir)
-    FOLDER = "beakjoon"
+    FOLDER = "baekjoon"
     os.chdir(cur_dir.split(FOLDER)[0])
 
     PATH_TARGET = os.path.abspath(os.curdir)
