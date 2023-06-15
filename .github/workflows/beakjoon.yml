@@ -28,6 +28,7 @@ jobs:
       - name: Get changed file names
         run: |
           git_path=$(which git)
+          $git_path config --global core.quotepath False
           $git_path  diff --name-only ${{ github.event.before }} ${{ github.sha }} > changed_files.txt
       - name: Auto post to notion
         env:
