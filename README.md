@@ -17,6 +17,18 @@ This project is a template project to help solve various algorithm problems.
    - **NOTION_SELF_ID:** The personal ID of the Notion to record the problem solving.
 4. Go to the **Actions** tab of your fork and click the "enable" button
 5. Check the "Read repository content and packages permissions" in Settings > Actions > General > Workflow permissions
+6. Create a new repo using your fork
+
+   - first, start your repo that created
+   - second, try this command
+
+   ```
+   git remote add upstream [fork repo url]
+   git fetch --all
+   git pull upstream [your branch]
+   ```
+
+   - When merging the template repo into your existing repo, conflicts may arise. We recommend creating a local branch that tracks the upstream and merging the changes locally to resolve any conflicts
 
 ### How to Use
 
